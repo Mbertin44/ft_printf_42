@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:01:43 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/06 14:28:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/09 12:09:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	ft_putchar(char c, int *len)
 {
 	write(1, &c, 1);
-	(*len)++;
-				/* Ici je dois mettre entre parenthese mon *len car je veux qu'il 
+	*len += 1;
+				/* 			PLUS A JOUR MAIS TOUJOURS VALABLE
+				
+				---> (*len)++;
+				Ici je dois mettre entre parenthese mon *len car je veux qu'il 
 				comprenne que je veux incrémenter la valeur du pointeur est non 
 				pas l'adresse. La lecture des règles ce fait de droit a gauche
 				et le fais de désigner la valeur d'un pointeur ou d'incrémenter 
@@ -56,4 +59,30 @@ void	ft_putnbr(int n, int *len)
 		}
 		ft_putchar(48 + n % 10, len);
 	}
+}
+
+int	ft_puthex(unsigned long n, int *len, char str, int base)
+{
+	int	i;
+
+	i = 0;
+	if (n >= base)
+	{
+		ft_puthex(n / base, len, str, base);
+		i++;
+		ft_puthex(n % base, len, str, base);
+	}
+	else
+	{
+		if (n <= 9)
+			ft_putchar((n + '0'), len);
+		else
+		{
+			if (str == 'x' || str == 'p')
+				ft_putchar((n - 10 + 'a'), len);
+			if (str == 'X')
+				ft_putchar((n - 10 + 'A'), len);
+		}
+	}
+	return (i);
 }

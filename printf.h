@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:19:18 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/06 10:10:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/09 12:09:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include<stdarg.h>
 
 void	ft_putstr(char *str, int *len);
-void		ft_putchar(char c, int *len);
+void	ft_putchar(char c, int *len);
 void	ft_putnbr(int n, int *len);
+int		ft_puthex(unsigned long n, int *len, char str, int base);
 
 #endif
