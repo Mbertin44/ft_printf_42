@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:59:36 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/09 14:05:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:05:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 void	ft_printf_arg(const char *str, va_list params, int *len)
 {
 	if (*str == 'd' || *str == 'i')
-		ft_putnbr((int)va_arg(params, int), len);
+		ft_putnbr(va_arg(params, int), len);
 	if (*str == 'c')
-		ft_putchar((char)va_arg(params, int), len);
+		ft_putchar((unsigned char)va_arg(params, int), len);
 	if (*str == 's')
-		ft_putstr((char *)va_arg(params, char *), len);
+		ft_putstr(va_arg(params, char *), len);
 	if (*str == 'x' || *str == 'X')
-		ft_puthex((size_t)va_arg(params, size_t), len, *str, 16);
+		ft_puthex((unsigned int)va_arg(params, int), len, *str, 16);
 	if (*str == 'u')
-		ft_puthex(va_arg(params, unsigned int), len, *str, 10);
+		ft_puthex((unsigned int)va_arg(params, int), len, *str, 10);
 	if (*str == 'p')
 	{
 		*len += 2;
