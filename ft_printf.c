@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:59:36 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/10 09:05:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/10 11:51:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_printf(const char *format, ...)
 	va_list	params;
 
 	len = malloc(sizeof(int));
+	*len = 0;
 	if (!len)
 		return (0);
 	va_start(params, format);
@@ -54,6 +55,7 @@ int	ft_printf(const char *format, ...)
 			ft_putchar(format[i], len);
 		i++;
 	}
+	va_end(params);
 	return (*len);
 }
 

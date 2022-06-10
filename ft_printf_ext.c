@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:01:43 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/10 09:04:41 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:23:33 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_putnbr(int n, int *len)
 	}
 }
 
-int	ft_puthex(unsigned long n, int *len, char str, int base)
+int	ft_puthex(unsigned long n, int *len, char str, size_t base)
 {
 	int	i;
 
