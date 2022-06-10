@@ -6,42 +6,33 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:59:36 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/09 12:32:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:05:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"printf.h"
 #include <stdlib.h>
 
-void	ft_printf_arg(char *str, va_list params, int *len)
+void	ft_printf_arg(const char *str, va_list params, int *len)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
+	if (*str == 'd' || *str == 'i')
+		ft_putnbr((int)va_arg(params, int), len);
+	if (*str == 'c')
+		ft_putchar((char)va_arg(params, int), len);
+	if (*str == 's')
+		ft_putstr((char *)va_arg(params, char *), len);
+	if (*str == 'x' || *str == 'X')
+		ft_puthex((size_t)va_arg(params, size_t), len, *str, 16);
+	if (*str == 'u')
+		ft_puthex(va_arg(params, unsigned int), len, *str, 10);
+	if (*str == 'p')
 	{
-		if (str[i] == '%')
-		{
-			i++;
-			if (str[i] == 'd' || str[i] == 'i')
-				ft_putnbr((int)va_arg(params, int), len);
-			if (str[i] == 'c')
-				ft_putchar((char)va_arg(params, int), len);
-			if (str[i] == 's')
-				ft_putstr((char *)va_arg(params, char *), len);
-			if (str[i] == 'x' || str[i] == 'X')
-				ft_puthex((size_t)va_arg(params, size_t), len, str[i], 16);
-			if (str[i] == 'u')
-				ft_puthex((size_t)va_arg(params, size_t), len, str[i], 10);
-			if (str[i] == 'p')
-			{
-				*len += 2;
-				write(1, "0x", 2);
-				ft_puthex(va_arg(params, unsigned long), len, str[i], 16);
-			}
-		}
-		i++;
+		*len += 2;
+		write(1, "0x", 2);
+		ft_puthex(va_arg(params, unsigned long), len, *str, 16);
 	}
+	if (*str == '%')
+		ft_putchar('%', len);
 }
 
 int	ft_printf(const char *format, ...)
@@ -58,10 +49,7 @@ int	ft_printf(const char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-		{
-			ft_printf_arg((char *)format, params, len);
-			i++;
-		}
+			ft_printf_arg(&format[++i], params, len);
 		else
 			ft_putchar(format[i], len);
 		i++;
@@ -76,10 +64,10 @@ int	main(int argc, char const *argv[])
 	char	c;
 	char	str[] = "coucou";
 
-	a = 15;
+	a = -2147483648;
 	b = 10;
 	c = 'c';
-	/*printf("FLAG d\n");
+	printf("FLAG d\n");
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %d\n", a));
 	printf("J'ai %d caracteres\n", printf("REEL: %d\n", a));
 	printf("\nFLAG i\n");
@@ -98,10 +86,13 @@ int	main(int argc, char const *argv[])
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %x\n", 154));
 	printf("J'ai %d caracteres\n", printf("REEL: %x\n", 154));
 	printf("\nFLAG u\n");
-	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %u\n", 154));
-	printf("J'ai %d caracteres\n", printf("REEL: %u\n", 154));*/
+	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %u\n", 4294967296));
+	printf("J'ai %d caracteres\n", printf("REEL: %u\n", 4294967296));
 	printf("\nFLAG p\n");
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %p\n", &a));
 	printf("J'ai %d caracteres\n", printf("REEL: %p\n", &a));
+	printf("\nFLAG %%\n");
+	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %%\n"));
+	printf("J'ai %d caracteres\n", printf("REEL: %%\n"));
 	return (0);
 }
