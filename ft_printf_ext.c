@@ -6,28 +6,28 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:01:43 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/10 09:23:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/15 10:12:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"printf.h"
+#include "ft_printf.h"
+
+/* 			PLUS A JOUR MAIS TOUJOURS VALABLE ( ligne 30 )
+
+---> (*len)++;
+Ici je dois mettre entre parenthese mon *len car je veux qu'il comprenne que je 
+veux incrémenter la valeur du pointeur est non pas l'adresse. La lecture des 
+règles ce fait de droit a gauche et le fais de désigner la valeur d'un pointeur 
+ou d'incrémenter une valeur on la même priorité donc la syntaxe -> *len++ voulait
+dire incrémente l'adresse delen puis désigné que je parle de la valeur de len et
+ non pas son adresse. 
+
+(*len)++ veut bien dire incrémente la valeur à l'adresse de len*/
 
 void	ft_putchar(char c, int *len)
 {
 	write(1, &c, 1);
 	*len += 1;
-				/* 			PLUS A JOUR MAIS TOUJOURS VALABLE
-				
-				---> (*len)++;
-				Ici je dois mettre entre parenthese mon *len car je veux qu'il 
-				comprenne que je veux incrémenter la valeur du pointeur est non 
-				pas l'adresse. La lecture des règles ce fait de droit a gauche
-				et le fais de désigner la valeur d'un pointeur ou d'incrémenter 
-				une valeur on la même priorité donc la syntaxe -> *len++ voulait
-				dire incrémente l'adresse delen puis désigné que je parle de la
-				valeur de len et non pas son adresse. 
-				
-			 (*len)++ veut bien dire incrémente la valeur à l'adresse de len*/
 }
 
 void	ft_putstr(char *str, int *len)
@@ -35,6 +35,12 @@ void	ft_putstr(char *str, int *len)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		*len += 6;
+		return ;
+	}
 	while (str[i] != '\0')
 	{
 		ft_putchar(str[i], len);

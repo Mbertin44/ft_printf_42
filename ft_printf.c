@@ -6,12 +6,11 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 08:59:36 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/10 11:51:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/10 13:06:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"printf.h"
-#include <stdlib.h>
+#include "ft_printf.h"
 
 void	ft_printf_arg(const char *str, va_list params, int *len)
 {
@@ -37,26 +36,23 @@ void	ft_printf_arg(const char *str, va_list params, int *len)
 
 int	ft_printf(const char *format, ...)
 {
-	int		*len;
+	int		len;
 	int		i;
 	va_list	params;
 
-	len = malloc(sizeof(int));
-	*len = 0;
-	if (!len)
-		return (0);
+	len = 0;
 	va_start(params, format);
 	i = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			ft_printf_arg(&format[++i], params, len);
+			ft_printf_arg(&format[++i], params, &len);
 		else
-			ft_putchar(format[i], len);
+			ft_putchar(format[i], &len);
 		i++;
 	}
 	va_end(params);
-	return (*len);
+	return (len);
 }
 
 int	main(int argc, char const *argv[])
@@ -65,10 +61,12 @@ int	main(int argc, char const *argv[])
 	int		b;
 	char	c;
 	char	str[] = "coucou";
+	char	*str2;
 
 	a = -2147483648;
 	b = 10;
 	c = 'c';
+	str2 = NULL;
 	printf("FLAG d\n");
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %d\n", a));
 	printf("J'ai %d caracteres\n", printf("REEL: %d\n", a));
@@ -79,8 +77,8 @@ int	main(int argc, char const *argv[])
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %c\n", c));
 	printf("J'ai %d caracteres\n", printf("REEL: %c\n", c));
 	printf("\nFLAG s\n");
-	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %s\n", str));
-	printf("J'ai %d caracteres\n", printf("REEL: %s\n", str));
+	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %s\n", str2));
+	printf("J'ai %d caracteres\n", printf("REEL: %s\n", str2));
 	printf("\nFLAG X\n");
 	ft_printf("J'ai %d caracteres\n", ft_printf("MIEN: %X\n", a));
 	printf("J'ai %d caracteres\n", printf("REEL: %X\n", a));
