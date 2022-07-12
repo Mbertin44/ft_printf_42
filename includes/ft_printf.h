@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:19:18 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/10 12:35:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/07/12 09:43:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include<stdio.h>
 # include<stdarg.h>
 # include <stdlib.h>
+# include <limits.h>
 
 void	ft_putstr(char *str, int *len);
 void	ft_putchar(char c, int *len);
 void	ft_putnbr(int n, int *len);
-int		ft_puthex(unsigned long n, int *len, char str, size_t base);
+void	ft_puthex(unsigned long n, int *len, char str, size_t base);
 
 #endif

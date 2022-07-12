@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 10:01:43 by mbertin           #+#    #+#             */
-/*   Updated: 2022/06/15 10:12:19 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/06/23 15:21:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,11 @@ void	ft_putnbr(int n, int *len)
 	}
 }
 
-int	ft_puthex(unsigned long n, int *len, char str, size_t base)
+void	ft_puthex(unsigned long n, int *len, char str, size_t base)
 {
-	int	i;
-
-	i = 0;
 	if (n >= base)
 	{
 		ft_puthex(n / base, len, str, base);
-		i++;
 		ft_puthex(n % base, len, str, base);
 	}
 	else
@@ -90,5 +86,4 @@ int	ft_puthex(unsigned long n, int *len, char str, size_t base)
 				ft_putchar((n - 10 + 'A'), len);
 		}
 	}
-	return (i);
 }
