@@ -22,4 +22,4 @@ Pour utiliser la fonction `ft_printf` dans votre projet, vous devez inclure le f
 
 ## Compilation
 
-Pour compiler le projet, vous pouvez utiliser le makefile fourni. La commande `make` compilera la librairie et créera un binaire nommé `libftprintf.a`.
+Pour compiler le projet, vous pouvez utiliser le makefile fourni. La commande `make` compilera la librairie et créera un binaire nommé `libftprintf.a`. Vous pouvez ensuite inclure cette bibliothèque dans votre projet en utilisant l'option `-L` suivie du chemin du dossier contenant la bibliothèque et l'option `-lftprintf` lors de la compilation de votre programme.
